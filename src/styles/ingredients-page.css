@@ -1,0 +1,332 @@
+/* ============================================================
+   ingredients-page.css - Recipe Details Styles
+   ============================================================
+   This page shows the full ingredient list and cooking steps
+   for a single recipe while staying in the same diner design
+   system as the home page.
+   ============================================================ */
+
+.ingredients-page {
+  width: 100%;
+  padding: 2rem 2rem 4rem;
+}
+
+.ingredients-hero,
+.ingredients-layout,
+.ingredients-state {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ingredients-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  gap: 2rem;
+  align-items: stretch;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--line-color);
+}
+
+.ingredients-copy-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-back-link {
+  width: fit-content;
+  margin-bottom: 1.35rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.ingredients-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.9rem, 6vw, 5rem);
+  line-height: 1.02;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.ingredients-intro {
+  max-width: 560px;
+  margin-bottom: 1.75rem;
+  color: var(--muted-color);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.ingredients-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+  max-width: 560px;
+}
+
+.ingredients-meta-card {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line-color);
+  border-radius: 20px;
+  background-color: var(--surface-color);
+}
+
+.ingredients-meta-card span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--muted-color);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.ingredients-meta-card strong {
+  color: var(--text-color);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.ingredients-submeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  color: var(--muted-color);
+}
+
+.recipe-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.recipe-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--line-color);
+  border-radius: 999px;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.ingredients-image-shell {
+  min-height: 460px;
+  border: 1px solid var(--line-color);
+  border-radius: 32px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.6), transparent 48%),
+    var(--surface-color);
+  box-shadow: 0 24px 60px rgba(27, 27, 24, 0.1);
+}
+
+.ingredients-image-shell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ingredients-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1.25rem;
+  padding-top: 2rem;
+}
+
+.ingredients-panel {
+  padding: 1.75rem;
+  border: 1px solid var(--line-color);
+  border-radius: 28px;
+  background-color: var(--surface-color);
+}
+
+.panel-head {
+  margin-bottom: 1.5rem;
+}
+
+.panel-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.panel-copy {
+  max-width: 540px;
+  color: var(--muted-color);
+  line-height: 1.7;
+}
+
+.ingredients-list,
+.instructions-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.ingredients-list {
+  list-style: none;
+}
+
+.ingredients-list li {
+  position: relative;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 1px solid var(--line-color);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(239, 225, 203, 0.32)),
+    var(--surface-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.ingredients-list li::before {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background-color: var(--text-color);
+  color: var(--surface-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transform: translateY(-50%);
+}
+
+.instructions-list {
+  list-style: none;
+  counter-reset: recipe-step;
+}
+
+.instructions-list li {
+  counter-increment: recipe-step;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line-color);
+  border-radius: 18px;
+  background-color: #fffaf3;
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+.instructions-list li::before {
+  content: counter(recipe-step, decimal-leading-zero);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border-radius: 999px;
+  background-color: var(--text-color);
+  color: var(--surface-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.instructions-empty {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line-color);
+  border-radius: 18px;
+  background-color: #fffaf3;
+  color: var(--muted-color);
+  line-height: 1.7;
+}
+
+.ingredients-state {
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ingredients-state-card {
+  width: 100%;
+  max-width: 760px;
+  padding: 2rem;
+  border: 1px solid var(--line-color);
+  border-radius: 32px;
+  background-color: var(--surface-color);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 24px 60px rgba(27, 27, 24, 0.08);
+}
+
+.ingredients-state-card-error {
+  justify-content: flex-start;
+}
+
+.ingredients-state-copy {
+  max-width: 420px;
+  color: var(--muted-color);
+  line-height: 1.7;
+}
+
+.ingredients-state-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--text-color);
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-hero-image {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+  border-radius: 24px;
+  background: linear-gradient(90deg, #f3f3f3 25%, #e6e6e6 50%, #f3f3f3 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite linear;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 920px) {
+  .ingredients-hero,
+  .ingredients-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ingredients-image-shell {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ingredients-page {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .ingredients-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ingredients-state-card {
+    padding: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ingredients-state-copy {
+    max-width: none;
+  }
+}

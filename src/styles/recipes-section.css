@@ -1,0 +1,200 @@
+/* ============================================================
+   recipes-section.css
+   ============================================================ */
+
+.recipes-section {
+  width: 100%;
+  padding: 1rem 2rem 4rem;
+  background:
+    radial-gradient(circle at top, rgba(240, 191, 102, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 253, 248, 0.72), rgba(239, 225, 203, 0.2));
+}
+
+.recipes-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line-color);
+}
+
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.section-label {
+  margin-bottom: 0.7rem;
+  color: var(--muted-color);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  text-align: left;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.4rem;
+  margin-bottom: 0;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.section-copy {
+  max-width: 380px;
+  color: var(--muted-color);
+  line-height: 1.7;
+  text-align: right;
+}
+
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.recipes-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.recipes-page-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.recipes-page-button {
+  border: 1px solid rgba(148, 105, 71, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.88);
+  color: var(--text-color);
+  padding: 0.7rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.recipes-page-button:hover:not(:disabled) {
+  border-color: rgba(148, 105, 71, 0.44);
+  background: #fffdf8;
+  transform: translateY(-1px);
+}
+
+.recipes-page-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.recipes-page-number {
+  min-width: 2.8rem;
+}
+
+.recipes-page-number.is-active {
+  border-color: #8c5a33;
+  background: #8c5a33;
+  color: #fffaf2;
+}
+
+.recipes-state-panel {
+  width: 100%;
+  min-height: 360px;
+  padding: 2rem;
+  border: 1px solid rgba(148, 105, 71, 0.18);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0) 42%),
+    rgba(255, 253, 248, 0.9);
+  box-shadow: 0 24px 60px rgba(27, 27, 24, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.recipes-state-copy {
+  max-width: 340px;
+  color: var(--muted-color);
+  line-height: 1.7;
+}
+
+.recipes-state-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--text-color);
+  font-weight: 400;
+  margin-bottom: 0.7rem;
+}
+
+.recipes-error,
+.recipes-empty {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+}
+
+.recipes-error {
+  border: 1px solid #d8b8b1;
+  background-color: #fff2ef;
+  color: #8c3628;
+}
+
+.recipes-empty-state {
+  width: 100%;
+  padding: 4rem 2rem;
+  text-align: center;
+  border: 1px solid var(--line-color);
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  margin-top: 1rem;
+}
+
+.recipes-empty {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.recipes-empty-hint {
+  color: var(--muted-color);
+  font-size: 1rem;
+}
+
+
+@media (max-width: 1024px) {
+  .recipes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .recipes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recipes-pagination {
+    gap: 0.75rem;
+  }
+
+  .recipes-state-panel {
+    padding: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+}

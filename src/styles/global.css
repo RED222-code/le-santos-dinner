@@ -1,0 +1,44 @@
+/* ============================================================
+   global.css — Resets & Design Tokens
+   ============================================================
+   This file sets up the foundation for the entire app:
+   1. A universal reset (removes default browser margins/padding)
+   2. CSS custom properties (variables) so we can reuse colors
+      and values consistently across all our stylesheets.
+   ============================================================ */
+
+/* --- Universal Reset ---
+   Every HTML element starts with no margin, no padding,
+   and uses border-box sizing (padding is included in width). */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- Body Defaults --- */
+body {
+  overflow-y: auto;
+  background-color: #f3efe7;
+  color: #1b1b18;
+}
+
+/* --- Design Tokens (CSS Variables) ---
+   These variables define our color palette and are used
+   throughout all the other CSS files with var(--name).
+   Changing a value here updates it everywhere at once. */
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --bg-color: #f3efe7;
+  --surface-color: #fffdf8;
+  --text-color: #1b1b18;
+  --muted-color: #6d685f;
+  --line-color: #d6d0c7;
+  --primary-color: #1b1b18;
+  --accent-clay: #bb6f43;
+  --accent-copper: #8a4e2d;
+  --accent-gold: #f0bf66;
+  --accent-cream: #efe1cb;
+  --wood-tone: #946947;
+  --soft-shadow: rgba(27, 27, 24, 0.14);
+}

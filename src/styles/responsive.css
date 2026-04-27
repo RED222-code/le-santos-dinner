@@ -1,0 +1,76 @@
+/* ============================================================
+   responsive.css — Mobile / Tablet Adjustments
+   ============================================================
+   These @media rules override desktop styles when the screen
+   is 768px or narrower. Each block is labeled with the
+   component it adjusts.
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Hero stacks vertically on small screens */
+  .hero-section {
+    flex-direction: column;
+    padding: 2rem 1rem;
+  }
+
+  .hero-left,
+  .hero-right {
+    flex: 1;
+    padding: 0;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content h2 {
+    font-size: 0.8rem;
+  }
+
+  /* Stats stack into a single column */
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-slideshow {
+    max-width: 100%;
+  }
+
+  .slideshow-frame {
+    min-height: 340px;
+  }
+
+  /* Nav wraps and centers on mobile */
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .navbar > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Tighter padding on the recipes section */
+  .recipes-section {
+    padding: 1rem 1rem 3rem;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-copy {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  /* Smaller pot loader on mobile */
+  .pot-loader {
+    width: 166px;
+    height: 172px;
+  }
+}

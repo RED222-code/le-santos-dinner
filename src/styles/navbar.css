@@ -1,0 +1,91 @@
+/* ============================================================
+   navbar.css — Navigation Bar Styles
+   ============================================================
+   Styles for the top navigation bar: logo, nav links, and
+   the "Reserve" button. Uses flexbox for horizontal layout.
+   ============================================================ */
+.navbar-shell {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  gap: 90px;
+  background-color: rgba(243, 239, 231, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.navbar {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--line-color);
+}
+
+/* The restaurant name / logo text */
+.navbar > .logo {
+  text-decoration: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--text-color);
+}
+
+/* Horizontal list of navigation links */
+.navbar > ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.navbar > ul a {
+  color: var(--muted-color);
+  text-decoration: none;
+}
+
+.navbar > ul a:hover,
+.navbar > ul a:focus-visible {
+  color: var(--text-color);
+}
+
+/* Search bar styles */
+.navbar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 280px;
+  width: 100%;
+}
+
+.navbar-search input {
+  width: 100%;
+  padding: 0.6rem 1rem 0.6rem 2.5rem;
+  border-radius: 99px;
+  border: 1px solid var(--line-color);
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  color: var(--text-color);
+  outline: none;
+}
+
+.navbar-search input:focus {
+  background-color: #ffffff;
+  border-color: var(--text-color);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.03);
+}
+
+.navbar-search .search-icon {
+  position: absolute;
+  left: 0.9rem;
+  color: var(--muted-color);
+  pointer-events: none;
+}
+

@@ -1,0 +1,332 @@
+/* ============================================================
+   pot-loader.css — Pot Loader Animation Styles
+   ============================================================
+   These styles power the animated cooking pot that appears
+   while recipes are loading. The pot has:
+     - Boiling water with ripples and sheen
+     - Rising steam wisps
+     - Bubbles popping on the surface
+     - Flickering flames underneath
+   Each element is animated with CSS @keyframes.
+   ============================================================ */
+
+/* --- Loading Card Container --- */
+.food-card-loading {
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--muted-color);
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.6), transparent 36%),
+    linear-gradient(180deg, #d9e5ef 0%, #cfdeea 100%);
+}
+
+/* --- Pot SVG Wrapper --- */
+.pot-loader {
+  width: 220px;
+  max-width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.pot-loader-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 18px 20px rgba(45, 57, 70, 0.16));
+}
+
+/* --- Loading Text --- */
+.food-card-loading p {
+  color: #263440;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+}
+
+.loading-note {
+  color: #5e6b77;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Water Animations
+   ============================================================ */
+
+/* Gentle rocking motion of the water surface */
+.water-surface {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: water-rock 2.2s ease-in-out infinite;
+}
+
+/* Shimmering light reflection on the water */
+.water-sheen {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: water-sheen-shift 2.4s ease-in-out infinite;
+}
+
+/* Expanding ripple rings on the water surface */
+.ripple {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ripple-pulse 1.8s ease-in-out infinite;
+}
+
+/* Stagger the ripple animations so they don't all pulse at once */
+.ripple-two {
+  animation-delay: 0.4s;
+}
+
+.ripple-three {
+  animation-delay: 0.85s;
+}
+
+/* ============================================================
+   Bubble Animations
+   ============================================================ */
+
+/* Bubbles rise from the water and fade out */
+.bubble {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bubble-rise 1.7s ease-in-out infinite;
+}
+
+/* Stagger each bubble so they rise at different times */
+.bubble-two {
+  animation-delay: 0.3s;
+}
+
+.bubble-three {
+  animation-delay: 0.65s;
+}
+
+.bubble-four {
+  animation-delay: 0.95s;
+}
+
+.bubble-five {
+  animation-delay: 1.2s;
+}
+
+/* ============================================================
+   Steam Animations
+   ============================================================ */
+
+/* Each steam wisp drifts upward and fades.
+   CSS custom properties (--steam-*) let each wisp
+   have its own drift direction and speed. */
+.steam-path {
+  opacity: 0;
+  filter: blur(1.8px) drop-shadow(0 0 14px rgba(255, 255, 255, 0.42));
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  --steam-delay: 0s;
+  --steam-duration: 2.2s;
+  --steam-drift-x: 0px;
+  --steam-rise-y: -42px;
+  --steam-start-rotate: -6deg;
+  --steam-end-rotate: 10deg;
+  animation: steam-drift var(--steam-duration) ease-out infinite;
+  animation-delay: var(--steam-delay);
+}
+
+/* Larger, blurrier wisps for depth */
+.steam-plume {
+  filter: blur(3px) drop-shadow(0 0 20px rgba(255, 255, 255, 0.44));
+}
+
+/* --- Individual Steam Wisp Overrides ---
+   Each wisp gets unique timing, direction, and distance. */
+.steam-zero {
+  --steam-delay: 0.05s;
+  --steam-duration: 1.95s;
+  --steam-drift-x: -16px;
+  --steam-rise-y: -46px;
+  --steam-start-rotate: -10deg;
+  --steam-end-rotate: -18deg;
+}
+
+.steam-one {
+  --steam-delay: 0.2s;
+  --steam-duration: 2.15s;
+  --steam-drift-x: -10px;
+  --steam-rise-y: -52px;
+  --steam-start-rotate: -8deg;
+  --steam-end-rotate: -12deg;
+}
+
+.steam-two {
+  --steam-delay: 0.55s;
+  --steam-duration: 2.05s;
+  --steam-drift-x: -2px;
+  --steam-rise-y: -58px;
+  --steam-start-rotate: -2deg;
+  --steam-end-rotate: 4deg;
+}
+
+.steam-three {
+  --steam-delay: 0.95s;
+  --steam-duration: 2.1s;
+  --steam-drift-x: 8px;
+  --steam-rise-y: -54px;
+  --steam-start-rotate: 4deg;
+  --steam-end-rotate: 12deg;
+}
+
+.steam-four {
+  --steam-delay: 0.35s;
+  --steam-duration: 1.9s;
+  --steam-drift-x: 14px;
+  --steam-rise-y: -48px;
+  --steam-start-rotate: 6deg;
+  --steam-end-rotate: 18deg;
+}
+
+.steam-five {
+  --steam-delay: 1.15s;
+  --steam-duration: 2s;
+  --steam-drift-x: 4px;
+  --steam-rise-y: -62px;
+  --steam-start-rotate: 2deg;
+  --steam-end-rotate: 8deg;
+}
+
+/* ============================================================
+   Flame Animations
+   ============================================================ */
+
+/* Flames flicker by scaling and shifting vertically */
+.flame {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: flame-flicker 1.1s ease-in-out infinite;
+}
+
+/* Stagger each flame so they flicker independently */
+.flame-two {
+  animation-delay: 0.15s;
+}
+
+.flame-three {
+  animation-delay: 0.3s;
+}
+
+.flame-four {
+  animation-delay: 0.45s;
+}
+
+.flame-five {
+  animation-delay: 0.2s;
+}
+
+.flame-six {
+  animation-delay: 0.55s;
+}
+
+.flame-seven {
+  animation-delay: 0.35s;
+}
+
+/* ============================================================
+   @keyframes — All Animation Definitions
+   ============================================================ */
+
+@keyframes water-rock {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(1);
+  }
+
+  50% {
+    transform: translateY(1px) scaleX(1.02);
+  }
+}
+
+@keyframes water-sheen-shift {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translateX(-4px);
+  }
+
+  50% {
+    opacity: 0.78;
+    transform: translateX(6px);
+  }
+}
+
+@keyframes ripple-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.84);
+  }
+
+  50% {
+    opacity: 0.75;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bubble-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(7px) scale(0.55);
+  }
+
+  30% {
+    opacity: 0.82;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-14px) scale(1.08);
+  }
+}
+
+@keyframes steam-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.58, 0.72) rotate(var(--steam-start-rotate));
+  }
+
+  18% {
+    opacity: 0.62;
+  }
+
+  45% {
+    opacity: 0.96;
+  }
+
+  75% {
+    opacity: 0.52;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--steam-drift-x), var(--steam-rise-y), 0) scale(1.24, 1.46) rotate(var(--steam-end-rotate));
+  }
+}
+
+@keyframes flame-flicker {
+  0%,
+  100% {
+    opacity: 0.86;
+    transform: scaleY(0.92) translateY(1px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleY(1.08) translateY(-2px);
+  }
+}

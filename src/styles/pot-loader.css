@@ -1,29 +1,18 @@
 /* ============================================================
    pot-loader.css — Pot Loader Animation Styles
-   ============================================================
-   These styles power the animated cooking pot that appears
-   while recipes are loading. The pot has:
-     - Boiling water with ripples and sheen
-     - Rising steam wisps
-     - Bubbles popping on the surface
-     - Flickering flames underneath
-   Each element is animated with CSS @keyframes.
    ============================================================ */
 
 /* --- Loading Card Container --- */
 .food-card-loading {
-  min-height: 380px;
+  min-height: unset;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.7rem;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem;
   text-align: center;
-  color: var(--muted-color);
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.6), transparent 36%),
-    linear-gradient(180deg, #d9e5ef 0%, #cfdeea 100%);
 }
 
 /* --- Pot SVG Wrapper --- */

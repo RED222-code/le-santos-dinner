@@ -92,25 +92,37 @@
   align-items: center;
   min-width: 180px;
   padding: 0.85rem 1.35rem;
-  border: 1px solid var(--text-color);
-  border-radius: 999px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.95rem;
   background-color: transparent;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   text-align: center;
   text-decoration: none;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
 }
 
 /* Filled button variant */
 .btn-primary {
-  background-color: var(--text-color);
-  color: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+}
+.btn-primary:hover {
+  background-color: var(--surface-color);
+  box-shadow: 0 8px 25px var(--accent-glow-subtle);
 }
 
-/* Outlined button variant */
 .btn-outline {
   color: var(--text-color);
+  border: 1px solid var(--line-color);
+}
+.btn-outline:hover {
+  border-color: var(--text-color);
+  background-color: var(--surface-color);
+  box-shadow: 0 8px 25px var(--accent-glow-subtle);
 }
 
 /* --- Hero Right Column --- */
@@ -167,9 +179,7 @@
   border: 1px solid var(--line-color);
   border-radius: 32px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.55), transparent 45%),
-    var(--surface-color);
+  background: var(--hero-gradient), var(--surface-color);
   box-shadow: 0 24px 60px rgba(27, 27, 24, 0.1);
 }
 

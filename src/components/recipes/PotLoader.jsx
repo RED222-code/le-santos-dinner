@@ -1,18 +1,6 @@
-/* ============================================================
-   PotLoader.jsx — Animated Cooking Pot (Loading Indicator)
-   ============================================================
-   This component renders an SVG illustration of a boiling pot
-   with animated steam, bubbles, ripples, and flames. It is
-   displayed inside FoodCard while recipes are being fetched.
-
-   The SVG uses unique gradient IDs (via React's useId hook)
-   so that multiple PotLoader instances on the same page
-   don't conflict with each other.
-   ============================================================ */
-
 import { useId } from "react";
 
-function PotLoader() {
+function PotLoader({ size = "220px", hideText = false }) {
   // useId() gives us a unique string for this component instance.
   // We strip colons because SVG IDs can't contain them.
   const uniqueId = useId().replace(/:/g, "");
@@ -28,7 +16,7 @@ function PotLoader() {
 
   return (
     <div className="food-card-loading">
-      <div className="pot-loader" aria-hidden="true">
+      <div className="pot-loader" aria-hidden="true" style={{ width: size }}>
         <svg
           className="pot-loader-svg"
           viewBox="0 0 360 320"
@@ -305,9 +293,13 @@ function PotLoader() {
         </svg>
       </div>
 
-      {/* Loading message text */}
-      <p>Loading recipes...</p>
-      <span className="loading-note">The pot is boiling on the stove.</span>
+      {!hideText && (
+        <>
+          {/* Loading message text */}
+          <p>Loading recipes...</p>
+          <span className="loading-note">The pot is boiling on the stove.</span>
+        </>
+      )}
     </div>
   );
 }

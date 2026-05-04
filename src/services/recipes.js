@@ -36,18 +36,11 @@ function parseInstructions(instructions) {
     .filter(Boolean);
 }
 
-function getRecipeDescription(instructions) {
-  const [firstStep] = parseInstructions(instructions);
-
-  if (!firstStep) {
-    return DEFAULT_DESCRIPTION;
+function getRecipeDescription(meal) {
+  if (meal.strArea && meal.strCategory) {
+    return `A signature ${meal.strArea} ${meal.strCategory.toLowerCase()} dish, prepared fresh at Le Santos Diner.`;
   }
-
-  if (firstStep.length <= 150) {
-    return firstStep;
-  }
-
-  return `${firstStep.slice(0, 147).trimEnd()}...`;
+  return DEFAULT_DESCRIPTION;
 }
 
 function parseTags(tags) {
@@ -120,7 +113,7 @@ function mapMealToCardData(meal) {
   return {
     id: Number(meal.idMeal),
     name: meal.strMeal,
-    description: getRecipeDescription(meal.strInstructions),
+    description: getRecipeDescription(meal),
     // Appending /preview to the URL returns a 100x100 thumbnail.
     image: baseImage || "",
     detailsPath: getRecipePath(meal.idMeal),
@@ -140,7 +133,7 @@ function mapMealToDetailData(meal) {
   return {
     id: Number(meal.idMeal),
     name: meal.strMeal,
-    description: getRecipeDescription(meal.strInstructions),
+    description: getRecipeDescription(meal),
     image: meal.strMealThumb ?? "",
     prepTime: getDurationLabel(prepTimeMinutes, DEFAULT_PREP_TIME),
     cookTime: getDurationLabel(cookTimeMinutes, DEFAULT_COOK_TIME),
@@ -226,4 +219,18 @@ export async function fetchRecipeById(recipeId, { signal } = {}) {
   }
 
   return mapMealToDetailData(meal);
+}
+
+export async function fetchRecipesByName(name, { signal } = {}) {
+  const response = await fetch(`${RECIPES_API_URL}/search.php?s=${name}`, {
+    signal,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch recipes for name ${name}: ${response.status}`);
+  }
+
+  const data = await response.json();
+  const meals = Array.isArray(data.meals) ? data.meals : [];
+  return meals.map(mapMealToCardData);
 }

@@ -8,36 +8,87 @@
 /* The outer card container */
 .food-card {
   background: var(--surface-color);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--line-color);
   border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 22px 40px rgba(27, 27, 24, 0.08);
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 12px 30px var(--soft-shadow);
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 300ms ease;
 }
 
 .food-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 28px 50px rgba(27, 27, 24, 0.12);
+  transform: var(--food-card-hover-transform);
+  box-shadow: var(--food-card-hover-shadow);
 }
 
 /* --- Card Image --- */
-.food-card-image {
+.food-card-image,
+.food-card-loader-container {
   width: 100%;
   height: 260px;
+  position: relative;
   overflow: hidden;
+}
+
+.food-card-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
 }
 
 .food-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 220ms ease;
+  transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .food-card:hover .food-card-image img {
-  transform: scale(1.04);
+  transform: scale(1.08);
+}
+
+.food-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 85%);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 400ms ease, transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.food-card-overlay::-webkit-scrollbar {
+  display: none;
+}
+
+.food-card:hover .food-card-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.food-card-overlay h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  margin-bottom: 0.8rem;
+  color: #fff;
+  font-weight: 400;
+}
+
+.food-card-overlay p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* --- Card Text Content --- */
@@ -54,6 +105,9 @@
   margin-bottom: 0.65rem;
   color: var(--text-color);
   font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .food-description {
@@ -62,24 +116,33 @@
   line-height: 1.7;
   font-size: 0.95rem;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* --- Meta Info (cook time, servings) --- */
 .food-meta {
   display: flex;
-  flex-wrap: wrap;
   gap: 0.6rem;
   margin-bottom: 1.2rem;
   font-size: 0.82rem;
   color: var(--muted-color);
   letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .food-meta span {
-  padding: 0.45rem 0.7rem;
+  padding: 0.4rem 0.8rem;
   border: 1px solid var(--line-color);
-  border-radius: 999px;
-  background: rgba(255, 250, 243, 0.92);
+  border-radius: 8px;
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: var(--text-color);
+  font-weight: 500;
 }
 
 /* --- "View Recipe" Button --- */
@@ -90,24 +153,29 @@
   justify-content: center;
   padding: 0.8rem;
   background-color: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--text-color);
-  border: 1px solid var(--text-color);
-  border-radius: 999px;
+  border: 1px solid var(--line-color);
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: auto;
   text-decoration: none;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  transition: all 250ms ease;
+  letter-spacing: 0.05em;
 }
 
 .recipe-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(27, 27, 24, 0.1);
+  transform: translateY(-2px);
+  background-color: var(--surface-color);
+  border-color: var(--text-color);
+  box-shadow: 0 8px 20px var(--accent-glow-subtle);
 }
 
 /* --- Loading / Skeleton --- */
 .skeleton {
-  background: linear-gradient(90deg, #f3f3f3 25%, #e6e6e6 50%, #f3f3f3 75%);
+  background: var(--skeleton-grad);
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite linear;
   border-radius: 8px;

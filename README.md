@@ -1,16 +1,50 @@
-# React + Vite
+# Le Santos Diner 🍳
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Le Santos Diner** is a high-end, luxury-themed recipe application designed for culinary enthusiasts. It features a curated collection of hand-crafted recipes with a focus on immersive UX, premium aesthetics (Vinewood Luxury theme), and professional-grade performance.
 
-Currently, two official plugins are available:
+## ✨ Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Vinewood Luxury Aesthetic**: A bespoke dual-mode theme (Dark/Light) featuring glassmorphism and smooth animations.
+- **Dynamic Pot Loader**: A custom-engineered SVG animation that brings the "boiling pot" to life during page transitions.
+- **Recipe Intelligence**: Filter recipes by cuisine, category, ingredients, or preparation time.
+- **Responsive Mastery**: Fully optimized for mobile, tablet, and desktop viewing.
+- **Persistent Favorites**: Save your favorite recipes locally for quick access.
 
-## React Compiler
+## 🚀 Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-## Expanding the ESLint configuration
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technical Stack
+
+- **Framework**: React.js
+- **Build Tool**: Vite
+- **Styling**: Vanilla CSS with custom properties (CSS variables)
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+
+## 📏 Development Standards
+
+This project adheres to the **Antigravity Global Development Rule**, ensuring:
+- **Lighthouse Scores**: 90+ across the board.
+- **Accessibility**: WCAG 2.1 compliance (ARIA, semantic HTML).
+- **SEO**: Dynamic metadata and structured data for optimal search visibility.
+
+---
+
+*Hand-crafted by David & Antigravity*

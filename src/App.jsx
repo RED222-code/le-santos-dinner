@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import FoodPage from "./pages/FoodPage";
 import IngredientsPage from "./pages/IngredientsPage";
+import PageLoader from "./components/layout/PageLoader";
+import { AnimatePresence } from "framer-motion";
 
 function getCurrentRoute(hash = window.location.hash) {
   const recipeMatch = hash.match(/^#\/recipes\/(\d+)$/);
@@ -14,44 +16,81 @@ function getCurrentRoute(hash = window.location.hash) {
 
   return { type: "home" };
 }
-
 function App() {
   const [route, setRoute] = useState(() => getCurrentRoute());
   const [searchQuery, setSearchQuery] = useState("");
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [theme, setTheme] = useState(() => localStorage.getItem("leSantosTheme") || "dark");
+
+  useEffect(() => {
+    // Show the pot loader for a bit on initial load
+    const timer = setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("leSantosTheme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === "dark" ? "light" : "dark");
+  };
 
   useEffect(() => {
     function handleHashChange() {
-      setRoute(getCurrentRoute());
+      const nextRoute = getCurrentRoute();
+      
+      // Only show transition loader when moving TO a recipe page
+      if (nextRoute.type === "recipe") {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setRoute(nextRoute);
+          setIsTransitioning(false);
+        }, 800);
+      } else {
+        setRoute(nextRoute);
+      }
     }
 
     window.addEventListener("hashchange", handleHashChange);
-
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    // If we're not on the home page, redirect to home to show search results
     if (route.type !== "home") {
       window.location.hash = "#/";
     }
   };
 
-  if (route.type === "recipe") {
-    return (
-      <IngredientsPage
-        recipeId={route.recipeId}
-        searchQuery={searchQuery}
-        onSearch={handleSearch}
-      />
-    );
-  }
-
   return (
-    <FoodPage
-      searchQuery={searchQuery}
-      onSearch={handleSearch}
-    />
+    <>
+      {(isTransitioning || isInitialLoading) && <PageLoader />}
+      <AnimatePresence mode="wait">
+        {route.type === "recipe" ? (
+          <IngredientsPage
+            key="recipe"
+            recipeId={route.recipeId}
+            searchQuery={searchQuery}
+            onSearch={handleSearch}
+            theme={theme}
+            toggleTheme={toggleTheme}
+          />
+        ) : (
+          <FoodPage
+            key="home"
+            searchQuery={searchQuery}
+            onSearch={handleSearch}
+            theme={theme}
+            toggleTheme={toggleTheme}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 

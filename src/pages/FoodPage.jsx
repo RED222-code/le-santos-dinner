@@ -13,6 +13,7 @@ import HeroSection from "../components/hero/HeroSection";
 import Navbar from "../components/layout/Navbar";
 import RecipesSection from "../components/recipes/RecipesSection";
 import { useRecipes } from "../hooks/useRecipes";
+import { motion } from "framer-motion";
 
 const RECIPE_LIMIT = 900;
 const SLIDE_CHANGE_DELAY_MS = 4500;
@@ -28,14 +29,25 @@ const GALLERY_IMAGES = [
   Image9,
 ];
 
-function FoodPage({ searchQuery, onSearch }) {
+function FoodPage({ searchQuery, onSearch, theme, toggleTheme }) {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const { recipes, isLoading, errorMessage } = useRecipes(RECIPE_LIMIT);
 
   // Filter recipes based on the search query
-  const filteredRecipes = recipes.filter((recipe) =>
-    recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredRecipes = recipes.filter((recipe) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    
+    const nameMatch = recipe.name.toLowerCase().includes(query);
+    const cuisineMatch = recipe.cuisine?.toLowerCase().includes(query);
+    const categoryMatch = recipe.category?.toLowerCase().includes(query);
+    const ingredientMatch = `${recipe.ingredientCount} ingredients`.includes(query);
+    const stepMatch = `${recipe.stepCount} steps`.includes(query);
+    const timeMatch = recipe.time?.toLowerCase().includes(query);
+    const servingMatch = `Serves ${recipe.servings}`.toLowerCase().includes(query);
+
+    return nameMatch || cuisineMatch || categoryMatch || ingredientMatch || stepMatch || timeMatch || servingMatch;
+  });
 
   useEffect(() => {
     // Move to the next slide every few seconds to keep the hero lively.
@@ -47,8 +59,13 @@ function FoodPage({ searchQuery, onSearch }) {
   }, []);
 
   return (
-    <>
-      <Navbar searchQuery={searchQuery} onSearch={onSearch} />
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <Navbar searchQuery={searchQuery} onSearch={onSearch} theme={theme} toggleTheme={toggleTheme} />
       <HeroSection
         galleryImages={GALLERY_IMAGES}
         activeSlide={activeSlideIndex}
@@ -58,8 +75,17 @@ function FoodPage({ searchQuery, onSearch }) {
         recipes={filteredRecipes}
         isLoading={isLoading}
         errorMessage={errorMessage}
+        onMetaClick={(item) => {
+          if (onSearch) {
+            onSearch(item);
+            const recipesSection = document.getElementById("recipes");
+            if (recipesSection) {
+              recipesSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        }}
       />
-    </>
+    </motion.div>
   );
 }
 

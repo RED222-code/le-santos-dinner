@@ -108,12 +108,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.7rem 1rem;
+  padding: 0.7rem 1.2rem;
   border: 1px solid var(--line-color);
-  border-radius: 999px;
-  background-color: var(--surface-color);
+  border-radius: 8px;
+  background-color: transparent;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: var(--text-color);
   font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+}
+
+.recipe-chip:hover {
+  border-color: var(--text-color);
+  background-color: var(--surface-color);
+  box-shadow: 0 4px 15px var(--accent-glow-subtle);
 }
 
 .ingredients-image-shell {
@@ -121,9 +132,8 @@
   border: 1px solid var(--line-color);
   border-radius: 32px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.6), transparent 48%),
-    var(--surface-color);
+  background: var(--ing-hero-grad), var(--surface-color);
+  backdrop-filter: var(--glass-blur);
   box-shadow: 0 24px 60px rgba(27, 27, 24, 0.1);
 }
 
@@ -144,7 +154,8 @@
   padding: 1.75rem;
   border: 1px solid var(--line-color);
   border-radius: 28px;
-  background-color: var(--surface-color);
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
 }
 
 .panel-head {
@@ -180,9 +191,7 @@
   padding: 1rem 1rem 1rem 3rem;
   border: 1px solid var(--line-color);
   border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(239, 225, 203, 0.32)),
-    var(--surface-color);
+  background: var(--ing-list-bg), var(--surface-color);
   color: var(--text-color);
   line-height: 1.6;
 }
@@ -198,8 +207,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background-color: var(--text-color);
-  color: var(--surface-color);
+  background-color: var(--ing-icon-color);
+  color: var(--ing-icon-text);
   font-size: 0.9rem;
   font-weight: 700;
   transform: translateY(-50%);
@@ -219,7 +228,7 @@
   padding: 1rem 1.1rem;
   border: 1px solid var(--line-color);
   border-radius: 18px;
-  background-color: #fffaf3;
+  background-color: var(--ing-instruction-bg);
   color: var(--text-color);
   line-height: 1.7;
 }
@@ -232,8 +241,8 @@
   min-width: 2.75rem;
   min-height: 2.75rem;
   border-radius: 999px;
-  background-color: var(--text-color);
-  color: var(--surface-color);
+  background-color: var(--ing-icon-color);
+  color: var(--ing-icon-text);
   font-size: 0.9rem;
   font-weight: 700;
 }
@@ -242,7 +251,7 @@
   padding: 1rem 1.1rem;
   border: 1px solid var(--line-color);
   border-radius: 18px;
-  background-color: #fffaf3;
+  background-color: var(--ing-instruction-bg);
   color: var(--muted-color);
   line-height: 1.7;
 }
@@ -290,7 +299,7 @@
   height: 180px;
   flex-shrink: 0;
   border-radius: 24px;
-  background: linear-gradient(90deg, #f3f3f3 25%, #e6e6e6 50%, #f3f3f3 75%);
+  background: var(--skeleton-grad);
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite linear;
 }
